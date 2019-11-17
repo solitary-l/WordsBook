@@ -17,8 +17,8 @@ public class MyContentProvider extends ContentProvider {
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(AUTHORITY, "wordsbook", WordsBook_DIR);
-        uriMatcher.addURI(AUTHORITY, "wordsbook/#", WordsBook_ITEM);
+        uriMatcher.addURI(AUTHORITY, "wordbook", WordsBook_DIR);
+        uriMatcher.addURI(AUTHORITY, "wordbook/#", WordsBook_ITEM);
     }
 
 
@@ -60,7 +60,7 @@ public class MyContentProvider extends ContentProvider {
             case WordsBook_DIR:
             case WordsBook_ITEM:
                 long newWord = db.insert("WordsBook", null, values);
-                uriReturn = Uri.parse("content://" + AUTHORITY + "/wordsbook/" + newWord);
+                uriReturn = Uri.parse("content://" + AUTHORITY + "/wordbook/" + newWord);
                 break;
             default:
                 break;
@@ -74,19 +74,19 @@ public class MyContentProvider extends ContentProvider {
         // TODO: Implement this to handle requests to update one or more rows.
         //更新数据
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int updatarows = 0;
+        int updatedRows = 0;
         switch (uriMatcher.match(uri)){
             case WordsBook_DIR:
-                updatarows = db.update("WordsBook",values,selection,selectionArgs);
+                updatedRows = db.update("WordsBook",values,selection,selectionArgs);
                 break;
             case WordsBook_ITEM:
                 String word = uri.getPathSegments().get(1);
-                updatarows = db.update("WordsBook",values,"id=?",new String[]{word});
+                updatedRows = db.update("WordsBook",values,"id=?",new String[]{word});
                 break;
             default:
                 break;
         }
-        return updatarows;
+        return updatedRows;
     }
 
     @Override
@@ -94,19 +94,19 @@ public class MyContentProvider extends ContentProvider {
         // Implement this to handle requests to delete one or more rows.
         //删除数据
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int deledRows = 0;
+        int deletedRows = 0;
         switch (uriMatcher.match(uri)){
             case WordsBook_DIR:
-                deledRows = db.delete("WordsBook",selection,selectionArgs);
+                deletedRows = db.delete("WordsBook",selection,selectionArgs);
                 break;
             case WordsBook_ITEM:
                 String word = uri.getPathSegments().get(1);
-                deledRows = db.delete("WordsBook","id=?",new String[]{word});
+                deletedRows = db.delete("WordsBook","id=?",new String[]{word});
                 break;
             default:
                 break;
         }
-        return deledRows;
+        return deletedRows;
     }
 
     @Override
@@ -115,9 +115,9 @@ public class MyContentProvider extends ContentProvider {
         // at the given URI.
         switch (uriMatcher.match(uri)){
             case WordsBook_DIR:
-                return "vnd.android.cursor.dir/vnd.com.example.wordsbook.provider.wordsbook";
+                return "vnd.android.cursor.dir/vnd.com.example.wordsbook.provider.wordbook";
             case WordsBook_ITEM:
-                return "vnd.android.cursor.item/vnd.com.example.wordsbook.provider.wordsbook";
+                return "vnd.android.cursor.item/vnd.com.example.wordsbook.provider.wordbook";
 
         }
         return null;
