@@ -25,7 +25,7 @@ public class MyContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         // TODO: Implement this to initialize your content provider on startup.
-        dbHelper = new database(getContext(), "WordsbookStore.db", null, 2);
+        dbHelper = new database(getContext(), "wordsbookb.db", null, 2);
         return true;
     }
 

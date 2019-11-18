@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv1;
-    private database dbHelper = new database(this, "Ven.db", null, 1);//连接数据库
+    private database dbHelper = new database(this, "wordsbookb.db", null, 1);//连接数据库
     private int flag = 0;//横竖屏flag，用于列表显示
 
     private List<Words> wordsList = new ArrayList<>();//单词列表
@@ -316,5 +316,6 @@ public class MainActivity extends AppCompatActivity {
         });
         ad1.show();
     }
+
 
 }
